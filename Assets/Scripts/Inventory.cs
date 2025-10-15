@@ -14,21 +14,21 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if(gamemanager.state == GameState.GAMEPLAY)
-        {
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                AddItem("Generic Item");
-            }
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                RemoveItem("Generic Item");
-            }
-        }
-        else
-        {
+        //if(gamemanager.state == GameState.GAMEPLAY)
+        //{
+        //    //if (Input.GetKeyDown(KeyCode.O))
+        //    //{
+        //    //    AddItem("Generic Item");
+        //    //}
+        //    //if (Input.GetKeyDown(KeyCode.P))
+        //    //{
+        //    //    RemoveItem("Generic Item");
+        //    //}
+        //}
+        //else
+        //{
 
-        }
+        //}
 
     }
 
@@ -42,4 +42,16 @@ public class Inventory : MonoBehaviour
         items.Remove(itemName); 
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        ItemObject collisionItem = hit.gameObject.GetComponent<ItemObject>();
+
+        if (collisionItem != null)
+        {
+            items.Add(collisionItem.name);
+
+            Destroy(collisionItem.gameObject);
+        }
+
+    }
 }
