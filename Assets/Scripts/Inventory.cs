@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField]
-    private List<string> items = new List<string>();
-    private GameManager gamemanager;
+    public List<InventoryItem> items = new List<InventoryItem>();
+    //private GameManager gamemanager;
 
     void Start()
     {
-        gamemanager = FindAnyObjectByType<GameManager>();
+        //gamemanager = FindAnyObjectByType<GameManager>();
     }
 
     private void Update()
@@ -30,30 +29,54 @@ public class Inventory : MonoBehaviour
 
         //}
 
-        
+
 
     }
 
-    public void AddItem(string itemName)
+    public void AddItem(InventoryItem item)
     {
-        items.Add(itemName);
-    }
-
-    public void RemoveItem(string itemName) 
-    { 
-        items.Remove(itemName); 
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        ItemObject collisionItem = hit.gameObject.GetComponent<ItemObject>();
-
-        if (collisionItem != null)
+        var existing = items.Find(i => i.itemName == item.itemName);
+        if (existing != null)
         {
-            items.Add(collisionItem.name);
-
-            Destroy(collisionItem.gameObject);
+            existing.quantity += item.quantity;
+        }
+        else
+        {
+            items.Add(new InventoryItem
+            {
+                itemName = item.itemName,
+                icon = item.icon,
+                prefab = item.prefab
+            });
         }
 
+            
     }
+
+    public void RemoveItem(InventoryItem item)
+    {
+        var existing = items.Find(i => i.itemName == item.itemName);
+        if (existing != null)
+        {
+            existing.quantity -= item.quantity;
+            if(existing.quantity <= 0)
+            {
+                items.Remove(existing);
+            }
+        }
+        
+    }
+
+    // private void OnControllerColliderHit(ControllerColliderHit hit)
+    // {
+    //     ItemObject collisionItem = hit.gameObject.GetComponent<ItemObject>();
+
+    //     if (collisionItem != null)
+    //     {
+    //         items.Add(collisionItem.name);
+
+    //         Destroy(collisionItem.gameObject);
+    //     }
+
+    // }
 }

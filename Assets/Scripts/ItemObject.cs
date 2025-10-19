@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-
+    [SerializeField]
+    private Camera playerCamera;
+    private float playerInteractionRange = 5.0f;
+    public LayerMask objectLayer;
+    public GameObject interactionUI;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,8 +17,19 @@ public class ItemObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, playerInteractionRange, objectLayer))
+        {
+            interactionUI.SetActive(true);
+        }
+        else
+        {
+            interactionUI.SetActive(false);
+        }
     }
 
-
 }
+
+
