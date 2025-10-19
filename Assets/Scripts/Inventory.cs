@@ -30,6 +30,8 @@ public class Inventory : MonoBehaviour
 
         //}
 
+        
+
     }
 
     public void AddItem(string itemName)
