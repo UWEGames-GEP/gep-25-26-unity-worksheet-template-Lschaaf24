@@ -53,12 +53,12 @@ public class Inventory : MonoBehaviour
             
     }
 
-    public void RemoveItem(InventoryItem item)
+    public void RemoveItem(InventoryItem item, int amount)
     {
         var existing = items.Find(i => i.itemName == item.itemName);
         if (existing != null)
         {
-            existing.quantity -= item.quantity;
+            existing.quantity -= amount;
             if(existing.quantity <= 0)
             {
                 items.Remove(existing);

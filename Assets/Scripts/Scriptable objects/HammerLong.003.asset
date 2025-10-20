@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: HammerLong.003
   icon: {fileID: 0}
   prefab: {fileID: 973622802417283690, guid: a197e3ec09c227244afe0b80ac223eb8, type: 3}
-  quantity: 0
+  quantity: 1

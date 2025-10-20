@@ -24,22 +24,39 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        if (currentItem = null) return;
+        originalParent = icon.transform.parent;
+        icon.transform.SetParent(canvas.transform);
+        icon.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        if (currentItem == null) return;
+        icon.transform.position = eventData.position;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (currentItem == null) return;
+        icon.transform.SetParent(originalParent);
+        icon.transform.localPosition = Vector3.zero;
+        icon.raycastTarget = true;
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        var draggedIcon = eventData.pointerDrag.GetComponent<InventorySlot>();
+        if(draggedIcon != null && draggedIcon != this && draggedIcon.currentItem != null)
+        {
+            var item = draggedIcon.currentItem;
+
+            draggedIcon.parentInventory.RemoveItem(item, 1);
+            parentInventory.AddItem(item);
+
+            InventoryUI.Instance.RefreshUI();
+        }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
+
 
 }

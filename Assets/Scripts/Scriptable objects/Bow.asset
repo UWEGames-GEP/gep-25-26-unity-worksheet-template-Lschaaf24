@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Bow
   icon: {fileID: 0}
   prefab: {fileID: 1557502234269309875, guid: 35d2a8dab4447e847880443f20c62714, type: 3}
-  quantity: 0
+  quantity: 3

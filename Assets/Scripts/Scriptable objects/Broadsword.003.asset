@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Broadsword.003
   icon: {fileID: 0}
   prefab: {fileID: 1731646951258653396, guid: 16f08f4df1cf86a4eb7c2ad063eaebaf, type: 3}
-  quantity: 0
+  quantity: 1

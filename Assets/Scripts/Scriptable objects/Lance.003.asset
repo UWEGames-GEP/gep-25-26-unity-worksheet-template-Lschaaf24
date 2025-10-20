@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Lance.003
   icon: {fileID: 0}
   prefab: {fileID: 4804803024417834698, guid: e739c62192639ce4c8cd222d25de17d5, type: 3}
-  quantity: 0
+  quantity: 2

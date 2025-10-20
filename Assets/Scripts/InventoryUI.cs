@@ -21,17 +21,17 @@ public class InventoryUI : MonoBehaviour
         playerInventory = FindAnyObjectByType<PlayerInventory>();
         gameObject.SetActive(false);
     }
-    void Open(WeaponRackInventory rack)
+    public void Open(WeaponRackInventory rack)
     {
         currentRack = rack;
         gameObject.SetActive(true);
         RefreshUI();
     }
-    void Close()
+    public void Close()
     {
         gameObject.SetActive(false);
     }
-    private void RefreshUI()
+    public void RefreshUI()
     {
         ClearSlots(playerSlotParent);
         ClearSlots(rackSlotParent);
@@ -51,7 +51,7 @@ public class InventoryUI : MonoBehaviour
     {
         var slotGO = Instantiate(slotPrefab, parent);
         var slot = slotGO.GetComponent<InventorySlot>();
-        
+        slot.setItem(item, inventory);
     }
 
     private void ClearSlots(Transform parent)

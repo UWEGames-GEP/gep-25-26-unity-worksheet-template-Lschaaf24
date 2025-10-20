@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: Axe.002
   icon: {fileID: 0}
   prefab: {fileID: 3992342622380636506, guid: 31fbd9db5fc6a494ba0fb0204421acfe, type: 3}
-  quantity: 0
+  quantity: 1
