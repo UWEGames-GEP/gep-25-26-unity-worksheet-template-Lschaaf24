@@ -5,14 +5,14 @@ public class ItemObject : MonoBehaviour
 {
     [SerializeField]
     private Camera playerCamera;
+
     private float playerInteractionRange = 5.0f;
     public LayerMask objectLayer;
     public GameObject interactionUI;
-    private WeaponRackInventory rackInventory;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -26,6 +26,8 @@ public class ItemObject : MonoBehaviour
             interactionUI.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
+                WeaponRackInventory rackInventory = hit.collider.GetComponent<WeaponRackInventory>();
+
                 InventoryUI.Instance.Open(rackInventory);
             }
         }

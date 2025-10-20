@@ -4,9 +4,12 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler, IDropHandler
 {
-    public InventoryItem currentItem;
-    public Inventory parentInventory;
-    public Image icon;
+    [SerializeField]
+    private InventoryItem currentItem;
+    [SerializeField]
+    private Inventory parentInventory;
+    [SerializeField]
+    private Image icon;
 
     private Transform originalParent;
     private Canvas canvas;
@@ -18,13 +21,22 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEnd
     {
         currentItem = item;
         parentInventory = inventory;
-        icon.sprite = item.icon;
-        icon.enabled = true;
+
+        if (item != null && icon != null)
+        {
+            icon.sprite = item.icon;
+            icon.enabled = true;
+        }
+        else 
+        {
+            icon.sprite = null;
+            icon.enabled = false;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (currentItem = null) return;
+        if (currentItem == null) return;
         originalParent = icon.transform.parent;
         icon.transform.SetParent(canvas.transform);
         icon.raycastTarget = false;

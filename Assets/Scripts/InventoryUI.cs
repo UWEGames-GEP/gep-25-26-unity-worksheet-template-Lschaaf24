@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
@@ -7,8 +8,8 @@ public class InventoryUI : MonoBehaviour
     private PlayerInventory playerInventory;
     private WeaponRackInventory currentRack;
 
-    public Transform playerSlotParent;
-    public Transform rackSlotParent;
+    public GameObject playerSlotParent;
+    public GameObject rackSlotParent;
     public GameObject slotPrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,38 +20,43 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         playerInventory = FindAnyObjectByType<PlayerInventory>();
-        gameObject.SetActive(false);
+        playerSlotParent.SetActive(false);
+        rackSlotParent.SetActive(false);
     }
     public void Open(WeaponRackInventory rack)
     {
         currentRack = rack;
-        gameObject.SetActive(true);
+        rackSlotParent.SetActive(true);
+        playerSlotParent.SetActive(true);
         RefreshUI();
+
     }
     public void Close()
     {
-        gameObject.SetActive(false);
+        rackSlotParent.SetActive(false);
+        playerSlotParent.SetActive(false);
     }
     public void RefreshUI()
     {
-        ClearSlots(playerSlotParent);
-        ClearSlots(rackSlotParent);
+        ClearSlots(playerSlotParent.transform);
+        ClearSlots(rackSlotParent.transform);
 
-        foreach (var item in playerInventory.items)
+        foreach (InventoryItem item in playerInventory.items)
         {
-            CreateSlot(item, playerInventory, playerSlotParent);
+            CreateSlot(item, playerInventory, playerSlotParent.transform);
         }
-        foreach (var item in currentRack.items)
+
+        foreach (InventoryItem item in currentRack.items)
         {
-            CreateSlot(item, currentRack, rackSlotParent);
+            CreateSlot(item, currentRack, rackSlotParent.transform);
         }
         
     }
 
     private void CreateSlot(InventoryItem item, Inventory inventory, Transform parent)
     {
-        var slotGO = Instantiate(slotPrefab, parent);
-        var slot = slotGO.GetComponent<InventorySlot>();
+        GameObject slotGen = Instantiate(slotPrefab, parent);
+        InventorySlot slot = slotGen.GetComponent<InventorySlot>();
         slot.setItem(item, inventory);
     }
 
