@@ -4,11 +4,15 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     public List<InventoryItem> items = new List<InventoryItem>();
-    //private GameManager gamemanager;
+
+    [SerializeField]
+    private InventoryUI inventory;
+
+    private GameManager gamemanager;
 
     void Start()
     {
-        //gamemanager = FindAnyObjectByType<GameManager>();
+        gamemanager = FindAnyObjectByType<GameManager>();
     }
 
     private void Update()
@@ -29,7 +33,12 @@ public class Inventory : MonoBehaviour
 
         //}
 
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventory.OpenPlayer();
+            gamemanager.state = GameState.PAUSE;
 
+        }
 
     }
 
@@ -67,16 +76,16 @@ public class Inventory : MonoBehaviour
         
     }
 
-    // private void OnControllerColliderHit(ControllerColliderHit hit)
-    // {
-    //     ItemObject collisionItem = hit.gameObject.GetComponent<ItemObject>();
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    ItemObject collisionItem = hit.gameObject.GetComponent<ItemObject>();
 
-    //     if (collisionItem != null)
-    //     {
-    //         items.Add(collisionItem.name);
+    //    if (collisionItem != null)
+    //    {
+    //        items.Add(collisionItem.name);
 
-    //         Destroy(collisionItem.gameObject);
-    //     }
+    //        Destroy(collisionItem.gameObject);
+    //    }
 
-    // }
+    //}
 }

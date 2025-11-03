@@ -28,7 +28,7 @@ public class ItemObject : MonoBehaviour
             {
                 WeaponRackInventory rackInventory = hit.collider.GetComponent<WeaponRackInventory>();
 
-                InventoryUI.Instance.Open(rackInventory);
+                InventoryUI.Instance.OpenWeapons(rackInventory);
             }
         }
         else

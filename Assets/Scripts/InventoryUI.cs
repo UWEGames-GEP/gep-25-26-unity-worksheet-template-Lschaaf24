@@ -23,7 +23,7 @@ public class InventoryUI : MonoBehaviour
         playerSlotParent.SetActive(false);
         rackSlotParent.SetActive(false);
     }
-    public void Open(WeaponRackInventory rack)
+    public void OpenWeapons(WeaponRackInventory rack)
     {
         currentRack = rack;
         rackSlotParent.SetActive(true);
@@ -31,6 +31,13 @@ public class InventoryUI : MonoBehaviour
         RefreshUI();
 
     }
+
+    public void OpenPlayer()
+    {
+        playerSlotParent.SetActive(true);
+        RefreshUI();
+    }
+
     public void Close()
     {
         rackSlotParent.SetActive(false);

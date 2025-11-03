@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public GameState state;
     private bool hasChangedState = false;
+    [SerializeField]
+    private InventoryUI inventory;
 
     void Start()
     {
@@ -32,7 +34,10 @@ public class GameManager : MonoBehaviour
                     hasChangedState = true;
                 }
                 break;
+
         }
+
+
 
         //If Statements
 
@@ -76,6 +81,7 @@ public class GameManager : MonoBehaviour
                         Time.timeScale = 0.0f;
                     }
                     break;
+
             }
 
         }
