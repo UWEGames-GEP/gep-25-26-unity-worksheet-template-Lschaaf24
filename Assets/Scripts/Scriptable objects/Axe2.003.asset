@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Axe2.003
   m_EditorClassIdentifier: 
   itemName: Axe2.003
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c19f6e967297a0d439cefd68d2c70b5b, type: 3}
   prefab: {fileID: 5463459404785014617, guid: 53e4ebc0d8ecc7b408bb22d320255855, type: 3}
   quantity: 1

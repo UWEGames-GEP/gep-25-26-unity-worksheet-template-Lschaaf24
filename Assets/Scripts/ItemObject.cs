@@ -9,6 +9,7 @@ public class ItemObject : MonoBehaviour
     private float playerInteractionRange = 5.0f;
     public LayerMask objectLayer;
     public GameObject interactionUI;
+    private bool isOpen = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,20 +25,29 @@ public class ItemObject : MonoBehaviour
         if (Physics.Raycast(ray, out hit, playerInteractionRange, objectLayer))
         {
             interactionUI.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && isOpen == false)
             {
                 WeaponRackInventory rackInventory = hit.collider.GetComponent<WeaponRackInventory>();
 
                 InventoryUI.Instance.OpenWeapons(rackInventory);
+                isOpen = true;
             }
+            else if(Input.GetKeyDown(KeyCode.E) && isOpen == true)
+            {
+                isOpen = false;
+                InventoryUI.Instance.Close();
+            }
+
         }
         else
         {
-            interactionUI.SetActive(false);
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && isOpen == true)
             {
+                isOpen = false;
                 InventoryUI.Instance.Close();
             }
+            interactionUI.SetActive(false);
+
         }
     }
 

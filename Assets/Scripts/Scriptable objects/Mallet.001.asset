@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Mallet.001
   m_EditorClassIdentifier: 
   itemName: Mallet.001
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bca767db7d6e0d04198cef563d1ff8d1, type: 3}
   prefab: {fileID: 243240873966861338, guid: 6329a24e9c3fed14bb2bff5edecc43e4, type: 3}
   quantity: 1

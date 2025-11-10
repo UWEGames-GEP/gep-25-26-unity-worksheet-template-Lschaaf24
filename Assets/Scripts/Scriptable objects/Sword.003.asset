@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sword.003
   m_EditorClassIdentifier: 
   itemName: Sword.003
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2d3b88b4f8f9317408db3f68d02bd958, type: 3}
   prefab: {fileID: 5118660327031747451, guid: 0895ea177a95acc45a95cd0b2d5fb989, type: 3}
   quantity: 1

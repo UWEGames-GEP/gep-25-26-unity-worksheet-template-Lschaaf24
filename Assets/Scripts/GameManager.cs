@@ -1,4 +1,4 @@
-using UnityEditor.Rendering;
+
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
         //Switch Statements
 
         switch (state)
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
                 {
                     state = GameState.PAUSE;
                     hasChangedState = true;
+                    inventory.OpenPlayer();
+
                 }
                 break;
 
@@ -32,11 +35,12 @@ public class GameManager : MonoBehaviour
                 {
                     state = GameState.GAMEPLAY;
                     hasChangedState = true;
+                    inventory.Close();
+
                 }
                 break;
 
         }
-
 
 
         //If Statements
@@ -58,6 +62,7 @@ public class GameManager : MonoBehaviour
         //     }
         // }
     }
+
 
     void LateUpdate()
     {
@@ -101,6 +106,7 @@ public class GameManager : MonoBehaviour
         //     }
         // }
     }
+
 }
 
 public enum GameState

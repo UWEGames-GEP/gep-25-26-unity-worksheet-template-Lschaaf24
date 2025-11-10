@@ -5,9 +5,6 @@ public class Inventory : MonoBehaviour
 {
     public List<InventoryItem> items = new List<InventoryItem>();
 
-    [SerializeField]
-    private InventoryUI inventory;
-
     private GameManager gamemanager;
 
     void Start()
@@ -33,12 +30,6 @@ public class Inventory : MonoBehaviour
 
         //}
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventory.OpenPlayer();
-            gamemanager.state = GameState.PAUSE;
-
-        }
 
     }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Broadsword.002
   m_EditorClassIdentifier: 
   itemName: Broadsword.002
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2d3b88b4f8f9317408db3f68d02bd958, type: 3}
   prefab: {fileID: 468681864959239619, guid: 9157bde8958184b4682e9bc61ba1c49a, type: 3}
   quantity: 1

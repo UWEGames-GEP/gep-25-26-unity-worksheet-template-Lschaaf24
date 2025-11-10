@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: IronShield.011
   m_EditorClassIdentifier: 
   itemName: IronShield.011
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 96376b50df8733e41aed310414233925, type: 3}
   prefab: {fileID: 7779632204941282152, guid: d5a340db870960a46a47c8a551d904d3, type: 3}
   quantity: 1

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Lance.003
   m_EditorClassIdentifier: 
   itemName: Lance.003
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c499509280d05294fb83a49fc1f64cad, type: 3}
   prefab: {fileID: 4804803024417834698, guid: e739c62192639ce4c8cd222d25de17d5, type: 3}
   quantity: 2
