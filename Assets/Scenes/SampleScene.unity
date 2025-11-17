@@ -4775,6 +4775,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  gameManager: {fileID: 565566237}
 --- !u!1001 &2073584152
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
-        //Switch Statements
+    }
 
+    public void ChangeGameState()
+    {
+        //switch the game state and bring up/close player inventory UI
         switch (state)
         {
             case GameState.GAMEPLAY:
@@ -42,25 +45,6 @@ public class GameManager : MonoBehaviour
 
         }
 
-
-        //If Statements
-
-        // if (state == GameState.GAMEPLAY)
-        // {
-        //     if (Input.GetKeyDown(KeyCode.Escape))
-        //     {
-        //         state = GameState.PAUSE;
-        //         hasChangedState = true;
-        //     }
-        // }
-        // else if (state == GameState.PAUSE)
-        // {
-        //     if (Input.GetKeyDown(KeyCode.Escape))
-        //     {
-        //         state = GameState.GAMEPLAY;
-        //         hasChangedState = true;
-        //     }
-        // }
     }
 
 
@@ -76,6 +60,7 @@ public class GameManager : MonoBehaviour
                 case GameState.GAMEPLAY:
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
+                        //plays time
                         Time.timeScale = 1.0f;
                     }
                     break;
@@ -83,6 +68,7 @@ public class GameManager : MonoBehaviour
                 case GameState.PAUSE:
                     if (Input.GetKeyDown(KeyCode.Escape))
                     {
+                        //stops time
                         Time.timeScale = 0.0f;
                     }
                     break;
@@ -106,6 +92,7 @@ public class GameManager : MonoBehaviour
         //     }
         // }
     }
+
 
 }
 

@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : ThirdPersonController
 {
+    public GameManager gameManager;
     private void OnPause(InputValue value)
     {
         if (value.isPressed)
         {
-            Debug.Log("Pause Game");
+            gameManager.ChangeGameState();
         }
     }
 }
