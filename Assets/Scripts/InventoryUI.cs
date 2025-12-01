@@ -25,6 +25,8 @@ public class InventoryUI : MonoBehaviour
     }
     public void OpenWeapons(WeaponRackInventory rack)
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         currentRack = rack;
         rackSlotParent.SetActive(true);
         playerSlotParent.SetActive(true);
@@ -34,12 +36,16 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenPlayer()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         playerSlotParent.SetActive(true);
         RefreshUI();
     }
 
     public void Close()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         rackSlotParent.SetActive(false);
         playerSlotParent.SetActive(false);
     }
@@ -48,16 +54,30 @@ public class InventoryUI : MonoBehaviour
         ClearSlots(playerSlotParent.transform);
         ClearSlots(rackSlotParent.transform);
 
-        foreach (InventoryItem item in playerInventory.items)
-        {
-            CreateSlot(item, playerInventory, playerSlotParent.transform);
-        }
+        CreateInventorySlots(playerInventory, playerSlotParent.transform);
 
-        foreach (InventoryItem item in currentRack.items)
+        if (currentRack != null)
         {
-            CreateSlot(item, currentRack, rackSlotParent.transform);
+            CreateInventorySlots(currentRack, rackSlotParent.transform);
         }
         
+    }
+
+    private void CreateInventorySlots(Inventory inventory, Transform parent)
+    {
+        int itemCount = inventory.items.Count;
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            CreateSlot(inventory.items[i], inventory, parent);
+        }
+
+        int emptyCount = inventory.maxSlots - itemCount;
+
+        for(int i = 0;i < emptyCount; i++)
+        {
+            CreateSlot(null, inventory, parent);
+        }
     }
 
     private void CreateSlot(InventoryItem item, Inventory inventory, Transform parent)

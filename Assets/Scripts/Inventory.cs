@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
     public List<InventoryItem> items = new List<InventoryItem>();
+    public int maxSlots = 8;
 
     private GameManager gamemanager;
 
@@ -35,36 +36,19 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(InventoryItem item)
     {
-        var existing = items.Find(i => i.itemName == item.itemName);
-        if (existing != null)
+        items.Add(new InventoryItem
         {
-            existing.quantity += item.quantity;
-        }
-        else
-        {
-            items.Add(new InventoryItem
-            {
-                itemName = item.itemName,
-                icon = item.icon,
-                prefab = item.prefab
-            });
-        }
+            itemName = item.itemName,
+            icon = item.icon,
+            prefab = item.prefab
+        });
 
-            
     }
 
-    public void RemoveItem(InventoryItem item, int amount)
+    public void RemoveItem(InventoryItem item)
     {
-        var existing = items.Find(i => i.itemName == item.itemName);
-        if (existing != null)
-        {
-            existing.quantity -= amount;
-            if(existing.quantity <= 0)
-            {
-                items.Remove(existing);
-            }
-        }
-        
+        items.Remove(item);
+        Destroy(item);
     }
 
     //private void OnControllerColliderHit(ControllerColliderHit hit)

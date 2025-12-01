@@ -11,6 +11,14 @@ public class PlayerInventory : Inventory
     // Update is called once per frame
     void Update()
     {
-        
+     
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.tag == "Item")
+        {
+            
+        }
     }
 }

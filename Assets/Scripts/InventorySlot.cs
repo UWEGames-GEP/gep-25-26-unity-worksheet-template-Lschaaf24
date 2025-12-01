@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using static UnityEditor.Progress;
 
-public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler, IDropHandler
+public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     private InventoryItem currentItem;
@@ -10,6 +11,8 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEnd
     private Inventory parentInventory;
     [SerializeField]
     private Image icon;
+    [SerializeField]
+    private Image highlight;
 
     private Transform originalParent;
     private Canvas canvas;
@@ -37,9 +40,14 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (currentItem == null) return;
+
+        //eventData.pointerDrag = gameObject;
+
         originalParent = icon.transform.parent;
         icon.transform.SetParent(canvas.transform);
+        icon.transform.SetAsLastSibling();
         icon.raycastTarget = false;
+
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -55,20 +63,67 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEnd
         icon.raycastTarget = true;
     }
 
-    public void OnDrop(PointerEventData eventData)
+    public void ReplaceItem(InventoryItem newItem, Inventory newParentInventory)
     {
-        var draggedIcon = eventData.pointerDrag.GetComponent<InventorySlot>();
-        if(draggedIcon != null && draggedIcon != this && draggedIcon.currentItem != null)
+        currentItem = newItem;
+        parentInventory = newParentInventory;
+
+        if (icon != null )
         {
-            var item = draggedIcon.currentItem;
-
-            draggedIcon.parentInventory.RemoveItem(item, 1);
-            parentInventory.AddItem(item);
-
-            InventoryUI.Instance.RefreshUI();
+            if(newItem != null)
+            {
+                icon.sprite = newItem.icon;
+                icon.enabled = true;
+            }
+            else
+            {
+                icon.sprite = null;
+                icon.enabled = false;
+            }
         }
     }
 
+    public void OnDrop(PointerEventData eventData)
+    {
+        var draggedSlot = eventData.pointerDrag.GetComponent<InventorySlot>();
 
 
+        if(draggedSlot != null && draggedSlot != this)
+        {
+            InventoryItem draggedItem = draggedSlot.currentItem;
+            Inventory draggedParent = draggedSlot.parentInventory;
+
+            InventoryItem currentSlotItem = currentItem;
+            Inventory currentSlotParent = parentInventory;
+
+            draggedParent.RemoveItem(draggedItem);
+            parentInventory.AddItem(draggedItem);
+
+            if (currentSlotItem != null)
+            {
+                currentSlotParent.RemoveItem(currentSlotItem);
+                draggedParent.AddItem(currentSlotItem);
+            }
+
+            this.ReplaceItem(draggedItem, parentInventory);
+            draggedSlot.ReplaceItem(currentSlotItem, draggedParent);
+
+            //var item = draggedIcon.currentItem;
+
+            //draggedIcon.parentInventory.RemoveItem(item);
+            //parentInventory.AddItem(item);
+
+            //InventoryUI.Instance.RefreshUI();
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (highlight != null) highlight.enabled = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (highlight != null) highlight.enabled = false;
+    }
 }
