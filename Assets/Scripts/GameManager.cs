@@ -24,25 +24,20 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.GAMEPLAY:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    state = GameState.PAUSE;
-                    hasChangedState = true;
-                    inventory.OpenPlayer();
+               
+                state = GameState.PAUSE;
+                hasChangedState = true;
+                inventory.OpenPlayer();
 
-                }
-                break;
+            break;
 
             case GameState.PAUSE:
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    state = GameState.GAMEPLAY;
-                    hasChangedState = true;
-                    inventory.Close();
+                
+                state = GameState.GAMEPLAY;
+                hasChangedState = true;
+                inventory.Close();
 
-                }
-                break;
-
+            break; 
         }
 
     }
@@ -55,23 +50,22 @@ public class GameManager : MonoBehaviour
         if (hasChangedState)
         {
             hasChangedState = false; 
+
             switch (state)
             {
                 case GameState.GAMEPLAY:
-                    if (Input.GetKeyDown(KeyCode.Escape))
-                    {
-                        //plays time
-                        Time.timeScale = 1.0f;
-                    }
-                    break;
+                    
+                    //plays time
+                    Time.timeScale = 1.0f;
+
+                break;
 
                 case GameState.PAUSE:
-                    if (Input.GetKeyDown(KeyCode.Escape))
-                    {
-                        //stops time
-                        Time.timeScale = 0.0f;
-                    }
-                    break;
+                   
+                    //stops time
+                    Time.timeScale = 0.0f;
+                    
+                break;
 
             }
 

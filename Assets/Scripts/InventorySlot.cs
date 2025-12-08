@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -61,6 +62,34 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler,IEnd
         icon.transform.SetParent(originalParent);
         icon.transform.localPosition = Vector3.zero;
         icon.raycastTarget = true;
+
+        bool droppedOnSlot = false;
+        foreach (var hovered in eventData.hovered)
+        {
+            if(hovered.GetComponent<InventorySlot>() != null)
+            {
+                droppedOnSlot = true;
+                break;
+            }
+        }
+
+        if (!droppedOnSlot)
+        {
+            DropItemIntoWorld();
+        }
+    }
+
+    private void DropItemIntoWorld()
+    {
+        parentInventory.RemoveItem(currentItem);
+        if(currentItem.prefab != null)
+        {
+            Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 5.0f;
+            GameObject.Instantiate(currentItem.prefab, dropPosition, Quaternion.identity);
+        }
+
+        ReplaceItem(null, parentInventory);
+        InventoryUI.Instance.RefreshUI();
     }
 
     public void ReplaceItem(InventoryItem newItem, Inventory newParentInventory)

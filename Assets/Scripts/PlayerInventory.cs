@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerInventory : Inventory
 {
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,11 +15,4 @@ public class PlayerInventory : Inventory
      
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if(hit.gameObject.tag == "Item")
-        {
-            
-        }
-    }
 }

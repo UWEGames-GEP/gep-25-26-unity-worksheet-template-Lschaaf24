@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Item
+  - InteractionUI
   layers:
   - Default
   - TransparentFX
